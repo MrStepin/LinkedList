@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    class Program
+    class Element<T>
     {
-        
-        
-        static void Main(string[] args)
+        public Element(T data)
         {
+            Data = data;
         }
+        public T Data { get; set; }
+        public Element<T> Next { get; set; }
     }
 }
