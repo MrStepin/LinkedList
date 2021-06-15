@@ -39,39 +39,40 @@ namespace LinkedList
 
         public void Remove(int numberOfElement)
         {
+            if (firstElement == null)
+                return;
+
+            if (numberOfElement == 0)
+            {
+                firstElement = firstElement.Next;
+                if (firstElement == null)
+                {
+                    lastElement = null;
+                }
+                return;
+            }
+
             Element<T> currentElement = firstElement;
             Element<T> previousElement = null;
-            int counter = 0;
 
-            while (currentElement != null)
+            while (numberOfElement-- > 0 && currentElement != null)
             {
-                if (counter == numberOfElement)
-                {
-                    if (previousElement != null)
-                    {
-                        previousElement.Next = currentElement.Next;
-                        if (currentElement.Next == null)
-                        {
-                            lastElement = previousElement;
-                        }
-                    }
-                    else
-                    {
-                        firstElement = firstElement.Next;
-                        if (firstElement == null)
-                        {
-                            lastElement = null;
-                        }
-                    }
-
-                }
-                counter += 1;
                 previousElement = currentElement;
                 currentElement = currentElement.Next;
             }
+
+            if (currentElement == null)
+                return;
+
+            previousElement.Next = currentElement.Next;
+
+            if (currentElement.Next == null)
+            {
+                lastElement = previousElement;
+            }
         }
 
-        public bool FindElement(T data)
+        public bool Contains(T data)
         {
             Element<T> currentElement = firstElement;
             while (currentElement != null)
